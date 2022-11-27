@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Show Books</title>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand text-info btn btn-primary border-info " href="/"><strong> &#8592 Back to Main Page</strong></a>
+    </div>
+    <div class="col-3 m-5" style="float:right">
+        <h1 class="text-center"> Title: {{book.title}}</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Favorited By:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for x in book.authors_favorite %}
+                    <tr>
+                        <td>{{x.name}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+            <form action="/join_author" method="post" class="col-3 text-center m-5 p-3">
+                <h2 class="text">Add A Favorite</h2>
+                <input type="hidden" name="book_id" value="{{book.id}}">
+                <div class="form-group">
+                    <label for="author_id">Book</label>
+                    <select name="author_id" class="form-control">
+                        {% for y in unfav_authors %}
+                            <option value="{{y.id}}">{{y.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <input type="submit" value="Add Book" class="btn btn-dark">
+            </form>
+        </div>
+</body>
+</html>
